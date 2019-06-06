@@ -16,7 +16,7 @@ public class CustomerController {
     @Autowired
     private CustomerService customerService;
 
-    @RequestMapping(value = "/")
+    @RequestMapping(value = {"/","/login"})
     public String getAllCustomer(){
         return "login";
 

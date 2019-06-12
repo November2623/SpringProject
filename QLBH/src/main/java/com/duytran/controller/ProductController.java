@@ -52,13 +52,13 @@ public class ProductController {
         if(checkExists(productList,product)){
             int temp_id = productService.getProductByQR_code(product.getQR_code()).getId();
             productService.updateProduct(temp_id, product.getAmount());
-            History history = new History("Receipt",product.getQR_code(),product.getAmount(),
-                    product.getAmount() * product.getPrice(), this.getDateTime());
-            historyRepository.save(history);
         }
         else{
             productService.addProduct(product);
         }
+        History history = new History("Receipt",product.getQR_code(),product.getAmount(),
+                product.getAmount() * product.getPrice(), this.getDateTime());
+        historyRepository.save(history);
         return "redirect:/Products";
 
     }

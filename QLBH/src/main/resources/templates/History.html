@@ -11,12 +11,12 @@
 
 
 
-    <link rel="stylesheet" href="/assets/css/style.css">
-    <link rel="stylesheet" href="/assets/css/loader-style.css">
-    <link rel="stylesheet" href="/assets/css/bootstrap.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/loader-style.css">
+    <link rel="stylesheet" href="assets/css/bootstrap.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css">
 
-    <link rel="stylesheet" type="text/css" href="/assets/js/progress-bar/number-pb.css">
+    <link rel="stylesheet" type="text/css" href="assets/js/progress-bar/number-pb.css">
 
 
 
@@ -35,7 +35,7 @@
         <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
     <!-- Fav and touch icons -->
-    <link rel="shortcut icon" href="/assets/ico/minus.png">
+    <link rel="shortcut icon" href="assets/ico/minus.png">
 </head>
 
 <body>
@@ -73,7 +73,7 @@
                 <ul style="margin-right:0;" class="nav navbar-nav navbar-right">
                     <li>
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                            <img alt="" class="admin-pic img-circle" src="http://api.randomuser.me/portraits/thumb/men/10.jpg">Hi, Dave Mattew <b class="caret"></b>
+                            <img alt="" class="admin-pic img-circle" src="http://api.randomuser.me/portraits/thumb/men/10.jpg"><span th:utext="${#request.userPrincipal.name}"></span><b class="caret"></b>
                         </a>
                         <ul style="margin-top:14px;" role="menu" class="dropdown-setting dropdown-menu">
                             <li>
@@ -272,6 +272,7 @@
 
 
 
+
     <!--  PAPER WRAP -->
     <div class="wrap-fluid" style="margin-left: 250px;">
         <div class="container-fluid paper-wrap bevel tlbr">
@@ -282,89 +283,132 @@
 
             <!-- CONTENT -->
             <!--TITLE -->
-            <div class="content-wrap">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="nest" id="elementClose">
-                            <div class="title-alt">
-                                <h6>
-                                    Form Customer</h6>
-                                <div class="titleClose">
-                                    <a class="gone" href="#elementClose">
-                                        <span class="entypo-cancel"></span>
-                                    </a>
-                                </div>
-                                <div class="titleToggle">
-                                    <a class="nav-toggle-alt" href="#element">
-                                        <span class="entypo-up-open"></span>
-                                    </a>
-                                </div>
+            <div class="row">
+                <div id="paper-top">
+                    <div class="col-sm-3">
+                        <h2 class="tittle-content-header">
+                            <i class="icon-window"></i> 
+                            <span>Dashboard
+                            </span>
+                        </h2>
 
+                    </div>
+
+                    <div class="col-sm-7">
+                        <div class="devider-vertical visible-lg"></div>
+                        <div class="tittle-middle-header">
+
+                            <div class="alert">
+                                <button type="button" class="close" data-dismiss="alert">×</button>
+                                <span class="tittle-alert entypo-info-circled"></span>
+                                Welcome back,&nbsp;
+                                <strong>Dave mattew!</strong>&nbsp;&nbsp;Your last sig in at Yesterday, 16:54 PM
                             </div>
 
-                            <div class="body-nest" id="element">
-                                <div class="panel-body">
-                                    <form th:action="@{/Providers/Update}" th:object="${provider}" method="post" class="form-horizontal bucket-form">
-                                        <div class="form-group">
-                                            <label class="col-sm-3 control-label">ID</label>
-                                            <div class="col-sm-6">
-                                                <input type="text" name="id" th:value="${provider.id}" class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-sm-3 control-label">Full Name</label>
-                                            <div class="col-sm-6">
-                                                <input type="text" name="provider_name" th:value="${provider.provider_name}" class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-sm-3 control-label">Address</label>
-                                            <div class="col-sm-6">
-                                                <input type="text" name="address" th:value="${provider.address}" class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-sm-3 control-label">Phone</label>
-                                            <div class="col-sm-6">
-                                                <input type="text" name="phone" th:value="${provider.phone}" class="form-control round-input">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-sm-3 control-label">Email</label>
-                                            <div class="col-sm-6">
-                                                <input type="text" name="email" th:value="${provider.email}" class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-sm-3 control-label">More Information</label>
-                                            <div class="col-sm-6">
-                                                <input type="text" name="more_info" th:value="${provider.more_info}" class="form-control">
-                                            </div>
-                                        </div>
-                                        <button class="btn btn-success" name="Update" type="Update">Insert</button>
-                                    </form>
-                                </div>
 
-                            </div>
+                        </div>
 
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="devider-vertical visible-lg"></div>
+                        <div class="btn-group btn-wigdet pull-right visible-lg">
+                            <div class="btn">
+                                Widget</div>
+                            <button data-toggle="dropdown" class="btn dropdown-toggle" type="button">
+                                <span class="caret"></span>
+                                <span class="sr-only">Toggle Dropdown</span>
+                            </button>
+                            <ul role="menu" class="dropdown-menu">
+                                <li>
+                                    <a href="#">
+                                        <span class="entypo-plus-circled margin-iconic"></span>Add New</a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <span class="entypo-heart margin-iconic"></span>Favorite</a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <span class="entypo-cog margin-iconic"></span>Setting</a>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>
             </div>
+            <!--/ TITLE -->
+
+            <!-- BREADCRUMB -->
+            <ul id="breadcrumb">
+                <li>
+                    <span class="entypo-home"></span>
+                </li>
+                <li><i class="fa fa-lg fa-angle-right"></i>
+                </li>
+                <li><a href="#" title="Sample page 1">Home</a>
+                </li>
+                <li><i class="fa fa-lg fa-angle-right"></i>
+                </li>
+                <li><a href="#" title="Sample page 1">Dashboard</a>
+                </li>
+                <li>
+                </li>
+                <li class="pull-right">
+                    <div class="input-group input-widget">
+
+                        <input style="border-radius:15px" id="myInput" type="text" placeholder="Search..." class="form-control">
+                    </div>
+                </li>
+            </ul>
+
+            <table id="example" class="table table-striped table-bordered" style="width:95%; margin: auto;">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Status</th>
+                    <th>Product QR_Code</th>
+                    <th>Amount</th>
+                    <th>Total</th>
+                    <th>DateTime</th>
+                </tr>
+                </thead>
+                <body>
+                <tr th:each="h : ${history}">
+                    <td th:text="${h.id}"></td>
+                    <td th:text="${h.status}"></td>
+                    <td th:text="${h.product_QR_code}"></td>
+                    <td th:text="${h.amount}"></td>
+                    <td th:text="${h.price}"></td>
+                    <td th:text="${h.date}"></td>
+                </tr>
+                </body>
+                <tfoot>
+                <tr>
+                    <th>ID</th>
+                    <th>Status</th>
+                    <th>Product QR_Code</th>
+                    <th>Amount</th>
+                    <th>Total</th>
+                    <th>DateTime</th>
+                </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
     <!--  END OF PAPER WRAP -->
 
     <!-- END OF RIGHT SLIDER CONTENT-->
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.js"></script>
-    <script src="/assets/js/progress-bar/src/jquery.velocity.min.js"></script>
+    <script src="assets/js/progress-bar/src/jquery.velocity.min.js"></script>
 
 
 
     <!-- MAIN EFFECT -->
-    <script type="text/javascript" src="/assets/js/preloader.js"></script>
-    <script type="text/javascript" src="/assets/js/bootstrap.js"></script>
-    <script type="text/javascript" src="/assets/js/app.js"></script>
+    <script type="text/javascript" src="assets/js/preloader.js"></script>
+    <script type="text/javascript" src="assets/js/bootstrap.js"></script>
+    <script type="text/javascript" src="assets/js/app.js"></script>
     <!-- <script type="text/javascript" src="assets/js/load.js"></script> -->
-    <script type="text/javascript" src="/assets/js/main.js"></script>
+    <script type="text/javascript" src="assets/js/main.js"></script>
     <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
     <script>

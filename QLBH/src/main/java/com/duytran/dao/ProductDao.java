@@ -11,4 +11,5 @@ public interface ProductDao {
     public void deleteProduct(int id);
     public List<Product> getAllProducts();
     public Product getProductById(int id);
+    public Product getProductByQR_code(int QR_code);
 }

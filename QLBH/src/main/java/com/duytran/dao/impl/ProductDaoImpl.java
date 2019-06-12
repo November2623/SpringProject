@@ -13,22 +13,22 @@ import java.sql.SQLException;
 import java.util.List;
 
 @Repository
-public class ProductDapImpl implements ProductDao {
+public class ProductDaoImpl implements ProductDao {
     @Autowired
     private JdbcTemplate jdbcTemplate;
     @Override
     public void addProduct(Product product) {
-        String sql = "insert into product(product_name, QR_code, id_provider, id_unit) value(?,?,?,?)";
+        String sql = "insert into product(product_name, QR_code, id_provider, amount) value(?,?,?,?)";
         jdbcTemplate.update(sql, product.getProduct_name(), product.getQR_code(), product.getId_provider(),
-                product.getId_unit());
+                product.getAmount());
 
     }
 
     @Override
     public void updateProduct(int id, int number) {
-        String sql = "update product set id_unit = ? where id = ?";
-        int total = getProductById(id).getId_unit() + number;
-        jdbcTemplate.update(sql, number,id);
+        String sql = "update product set amount = ? where id = ?";
+        int total = getProductById(id).getAmount() + number;
+        jdbcTemplate.update(sql, total, id);
     }
 
     @Override
@@ -42,7 +42,25 @@ public class ProductDapImpl implements ProductDao {
                 product.setProduct_name(rs.getString("product_name"));
                 product.setQR_code(rs.getInt("QR_code"));
                 product.setId_provider(rs.getInt("id_provider"));
-                product.setId_unit(rs.getInt("id_unit"));
+                product.setAmount(rs.getInt("amount"));
+
+                return product;
+            }
+        });
+    }
+
+    @Override
+    public Product getProductByQR_code(int QR_code) {
+        String sql = "select * from product where QR_code = ?";
+        return jdbcTemplate.queryForObject(sql, new Object[]{QR_code}, new RowMapper<Product>() {
+            @Override
+            public Product mapRow(ResultSet rs, int i) throws SQLException {
+                Product product = new Product();
+                product.setId(rs.getInt("id"));
+                product.setProduct_name(rs.getString("product_name"));
+                product.setQR_code(rs.getInt("QR_code"));
+                product.setId_provider(rs.getInt("id_provider"));
+                product.setAmount(rs.getInt("amount"));
 
                 return product;
             }
@@ -65,7 +83,7 @@ public class ProductDapImpl implements ProductDao {
                 product.setProduct_name(rs.getString("product_name"));
                 product.setQR_code(rs.getInt("QR_code"));
                 product.setId_provider(rs.getInt("id_provider"));
-                product.setId_unit(rs.getInt("id_unit"));
+                product.setAmount(rs.getInt("amount"));
                 return product;
             }
         });

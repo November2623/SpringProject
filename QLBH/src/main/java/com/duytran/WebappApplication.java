@@ -1,4 +1,4 @@
-package com.duytran.webapp;
+package com.duytran;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

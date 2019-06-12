@@ -5,7 +5,8 @@ public class Product {
     private String product_name;
     private int QR_code;
     private int id_provider;
-    private int id_unit;
+    private int amount;
+    private int price;
 
     public int getId() {
         return id;
@@ -39,11 +40,19 @@ public class Product {
         this.id_provider = id_provider;
     }
 
-    public int getId_unit() {
-        return id_unit;
+    public int getAmount() {
+        return amount;
     }
 
-    public void setId_unit(int id_unit) {
-        this.id_unit = id_unit;
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
     }
 }

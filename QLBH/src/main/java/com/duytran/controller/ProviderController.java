@@ -1,16 +1,18 @@
 package com.duytran.controller;
 
+import com.duytran.entity.Provider;
+import com.duytran.repository.ProviderRepository;
 import com.duytran.model.ProviderDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.duytran.service.ProviserService;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -19,6 +21,10 @@ public class ProviderController {
 
     @Autowired
     private ProviserService proviserService;
+
+    @Autowired
+    private ProviderRepository providerRepository;
+
 
     @RequestMapping(value = "/Providers")
     public String getAllProvider(HttpServletRequest rq){
@@ -50,7 +56,11 @@ public class ProviderController {
     }
     @RequestMapping(value = "/Providers/Delete")
     public String deleteProvider(@RequestParam int id){
-        proviserService.deleteProvider(proviserService.getProviderById(id));
+        Optional<Provider> provider = providerRepository.findById(id);
+        if(provider.isPresent())
+            providerRepository.delete(provider.get());
+
+        //providerRepository.deleteById(id);
         return "redirect:/Providers";
     }
 }

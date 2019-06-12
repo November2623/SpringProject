@@ -304,44 +304,45 @@
 
                             <div class="body-nest" id="element">
                                 <div class="panel-body">
-                                    <form th:action="@{/Providers/Update}" th:object="${provider}" method="post" class="form-horizontal bucket-form">
+                                    <form th:action="@{/Issue}" th:object="${product}" method="post" class="form-horizontal bucket-form">
                                         <div class="form-group">
-                                            <label class="col-sm-3 control-label">ID</label>
+                                            <label class="col-sm-3 control-label">Product Name</label>
                                             <div class="col-sm-6">
-                                                <input type="text" name="id" th:value="${provider.id}" class="form-control">
+                                                <input type="text" name="product_name" th:value="${product_name}" class="form-control">
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="col-sm-3 control-label">Full Name</label>
+                                            <label class="col-sm-3 control-label">QR Code</label>
                                             <div class="col-sm-6">
-                                                <input type="text" name="provider_name" th:value="${provider.provider_name}" class="form-control">
+                                                <input type="text" name="QR_code" th:value="${QR_code}" class="form-control">
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="col-sm-3 control-label">Address</label>
+                                            <label class="col-sm-3 control-label">ID Provider</label>
                                             <div class="col-sm-6">
-                                                <input type="text" name="address" th:value="${provider.address}" class="form-control">
+                                                <!--<input type="text" name="id_provider" th:value="${id_provider}" class="form-control round-input">-->
+                                                <select name="id_provider">
+
+                                                    <option th:each="provider : ${providers}"
+                                                            th:value="${provider.id}"
+                                                            th:text="${provider.provider_name}"/>
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="col-sm-3 control-label">Phone</label>
+                                            <label class="col-sm-3 control-label">Amount</label>
                                             <div class="col-sm-6">
-                                                <input type="text" name="phone" th:value="${provider.phone}" class="form-control round-input">
+                                                <input type="text" name="amount" th:value="${amount}" class="form-control">
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="col-sm-3 control-label">Email</label>
+                                            <label class="col-sm-3 control-label">Price</label>
                                             <div class="col-sm-6">
-                                                <input type="text" name="email" th:value="${provider.email}" class="form-control">
+                                                <input type="text" name="price" th:value="${price}" class="form-control">
                                             </div>
+                                            <label>VND</label>
                                         </div>
-                                        <div class="form-group">
-                                            <label class="col-sm-3 control-label">More Information</label>
-                                            <div class="col-sm-6">
-                                                <input type="text" name="more_info" th:value="${provider.more_info}" class="form-control">
-                                            </div>
-                                        </div>
-                                        <button class="btn btn-success" name="Update" type="Update">Insert</button>
+                                        <button class="btn btn-success" name="Insert" type="submit">Receipt</button>
                                     </form>
                                 </div>
 

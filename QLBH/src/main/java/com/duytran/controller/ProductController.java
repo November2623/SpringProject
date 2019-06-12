@@ -1,9 +1,11 @@
 package com.duytran.controller;
 
 import com.duytran.entity.History;
+import com.duytran.entity.ProductJpa;
 import com.duytran.model.Product;
 import com.duytran.model.ProviderDTO;
 import com.duytran.repository.HistoryRepository;
+import com.duytran.repository.ProductRepository;
 import com.duytran.service.ProductService;
 import com.duytran.service.ProviserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,15 +32,19 @@ public class ProductController {
     @Autowired
     private HistoryRepository historyRepository;
 
+    @Autowired
+    private ProductRepository productRepository;
+
     @RequestMapping(value = "/Products")
     public String getAllProducts(HttpServletRequest rs){
+
         List<Product> productList = productService.getAllProducts();
         rs.setAttribute("products", productList);
         return "ProductsList";
 
     }
     // receipt: nhap kho
-    @RequestMapping(value = "/Receipt")
+    @RequestMapping(value = "/UserPage/Receipt")
     public String loadFromReceipt(HttpServletRequest rq){
         Product product = new Product();
         List<ProviderDTO> providerList = proviserService.getAllProviders();
@@ -59,12 +65,12 @@ public class ProductController {
         History history = new History("Receipt",product.getQR_code(),product.getAmount(),
                 product.getAmount() * product.getPrice(), this.getDateTime());
         historyRepository.save(history);
-        return "redirect:/Products";
+        return "redirect:/UserPage";
 
     }
     // issue: xuat kho
 
-    @RequestMapping(value = "/Issue", method = RequestMethod.GET)
+    @RequestMapping(value = "/UserPage/Issue", method = RequestMethod.GET)
     public String loadFormIssue(HttpServletRequest rq){
         Product product = new Product();
         List<ProviderDTO> providerList = proviserService.getAllProviders();
@@ -84,7 +90,7 @@ public class ProductController {
             historyRepository.save(history);
 
         }
-        return "redirect:/Products";
+        return "redirect: /UserPage";
     }
     private boolean checkExists(List<Product> productList, Product product){
         for(Product p : productList){

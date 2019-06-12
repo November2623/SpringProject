@@ -1,5 +1,7 @@
 package com.duytran.controller;
 
+import com.duytran.model.Product;
+import com.duytran.service.ProductService;
 import com.duytran.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +17,16 @@ import java.util.List;
 public class UserController {
     @Autowired
     UserService userService;
+
+    @Autowired
+    ProductService productService;
+
+    @RequestMapping(value="/UserPage", method = RequestMethod.GET)
+    public String loadHome(HttpServletRequest rq){
+        List<Product> productList = productService.getAllProducts();
+        rq.setAttribute("products", productList);
+        return "UserPage";
+    }
     @RequestMapping(value = "/ListUser", method = RequestMethod.GET)
     public String getAllUser(HttpServletRequest rs){
         List<User> users = userService.getAllUsers();

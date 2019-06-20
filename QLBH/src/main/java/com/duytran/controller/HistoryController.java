@@ -15,8 +15,15 @@ public class HistoryController {
     @Autowired
     HistoryRepository historyRepository;
 
-    @RequestMapping(value = {"/History","/Admin"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/Admin"}, method = RequestMethod.GET)
     public String historyPage(HttpServletRequest rq){
+        List<History> history = historyRepository.findAll();
+        rq.setAttribute("history", history);
+        return "History";
+    }
+
+    @RequestMapping(value = {"/History"}, method = RequestMethod.GET)
+    public String historyPage2(HttpServletRequest rq){
         List<History> history = historyRepository.findAll();
         rq.setAttribute("history", history);
         return "History";

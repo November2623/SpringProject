@@ -18,9 +18,9 @@ public class ProductDaoImpl implements ProductDao {
     private JdbcTemplate jdbcTemplate;
     @Override
     public void addProduct(Product product) {
-        String sql = "insert into product(product_name, QR_code, id_provider, amount) value(?,?,?,?)";
+        String sql = "insert into product(product_name, QR_code, id_provider, amount, unit, price_receipt) value(?,?,?,?,?,?)";
         jdbcTemplate.update(sql, product.getProduct_name(), product.getQR_code(), product.getId_provider(),
-                product.getAmount());
+                product.getAmount(), product.getUnit(), product.getPrice_receipt());
 
     }
 
@@ -43,6 +43,8 @@ public class ProductDaoImpl implements ProductDao {
                 product.setQR_code(rs.getInt("QR_code"));
                 product.setId_provider(rs.getInt("id_provider"));
                 product.setAmount(rs.getInt("amount"));
+                product.setUnit(rs.getString("unit"));
+                product.setPrice_receipt(rs.getInt("price_receipt"));
 
                 return product;
             }
@@ -61,6 +63,8 @@ public class ProductDaoImpl implements ProductDao {
                 product.setQR_code(rs.getInt("QR_code"));
                 product.setId_provider(rs.getInt("id_provider"));
                 product.setAmount(rs.getInt("amount"));
+                product.setUnit(rs.getString("unit"));
+                product.setPrice_receipt(rs.getInt("price_receipt"));
 
                 return product;
             }
@@ -84,6 +88,8 @@ public class ProductDaoImpl implements ProductDao {
                 product.setQR_code(rs.getInt("QR_code"));
                 product.setId_provider(rs.getInt("id_provider"));
                 product.setAmount(rs.getInt("amount"));
+                product.setUnit(rs.getString("unit"));
+                product.setPrice_receipt(rs.getInt("price_receipt"));
                 return product;
             }
         });

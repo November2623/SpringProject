@@ -147,7 +147,7 @@
                         </li>
 
                         <li>
-                            <a class="tooltip-tip ajax-load" href="/Issue" title="Social">
+                            <a class="tooltip-tip ajax-load" href="/History" title="Social">
                                 <i class="icon-feed"></i>
                                 <span>Thống Kê</span>
 
@@ -372,6 +372,7 @@
                     <th>QR Code</th>
                     <th>Provider ID</th>
                     <th>Total</th>
+                    <th>Unit</th>
                 </tr>
                 </thead>
                 <body>
@@ -381,6 +382,7 @@
                     <td th:text = "${product.QR_code}"></td>
                     <td th:text = "${product.id_provider}"></td>
                     <td th:text = "${product.amount}"></td>
+                    <td th:text = "${product.unit}"></td>
                 </tr>
                 </body>
                 <tfoot>
@@ -390,6 +392,7 @@
                     <th>QR Code</th>
                     <th>Provider ID</th>
                     <th>Total</th>
+                    <th>Unit</th>
                 </tr>
                 </tfoot>
             </table>

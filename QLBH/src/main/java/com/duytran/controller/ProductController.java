@@ -63,7 +63,7 @@ public class ProductController {
             productService.addProduct(product);
         }
         History history = new History("Receipt",product.getQR_code(),product.getAmount(),
-                product.getAmount() * product.getPrice(), this.getDateTime());
+                product.getAmount() * product.getPrice_receipt(), this.getDateTime());
         historyRepository.save(history);
         return "redirect:/UserPage";
 
@@ -84,13 +84,25 @@ public class ProductController {
         List<Product> productList = productService.getAllProducts();
         if(checkExists(productList, product)){
             int temp_id = productService.getProductByQR_code(product.getQR_code()).getId();
-            productService.updateProduct(temp_id, - product.getAmount());
-            History history = new History("Issue",product.getQR_code(),product.getAmount(),
-                    product.getAmount() * product.getPrice(), this.getDateTime());
-            historyRepository.save(history);
+            Product product_temp  = productService.getProductById(temp_id);
+            if(product_temp.getAmount() < product.getAmount()){
+                return "redirect:/UserPage/Issue?error=true&message=1";
+            }
+            else{
+                productService.updateProduct(temp_id, - product.getAmount());
+                History history = new History("Issue",product.getQR_code(),product.getAmount(),
+                        product.getAmount() * product.getPrice_issue(), this.getDateTime());
+                historyRepository.save(history);
+
+                return "redirect:/UserPage";
+            }
 
         }
-        return "redirect: /UserPage";
+        else
+        {
+            return "redirect:/UserPage/Issue?error=true";
+        }
+
     }
     private boolean checkExists(List<Product> productList, Product product){
         for(Product p : productList){

@@ -322,7 +322,9 @@
                     <th>QR Code</th>
                     <th>Provider ID</th>
                     <th>Total</th>
+                    <th>Unit</th>
                 </tr>
+
                 </thead>
                 <body>
                 <tr th:each="product : ${products}">
@@ -331,6 +333,8 @@
                     <td th:text = "${product.QR_code}"></td>
                     <td th:text = "${product.id_provider}"></td>
                     <td th:text = "${product.amount}"></td>
+                    <td th:text = "${product.unit}"></td>
+
                 </tr>
                 </body>
                 <tfoot>
@@ -340,6 +344,7 @@
                     <th>QR Code</th>
                     <th>Provider ID</th>
                     <th>Total</th>
+                    <th>Unit</th>
                 </tr>
                 </tfoot>
             </table>

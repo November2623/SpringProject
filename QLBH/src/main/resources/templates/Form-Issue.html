@@ -170,7 +170,7 @@
                         </li>
 
                         <li>
-                            <a class="tooltip-tip ajax-load" href="icon.html" title="Icons">
+                            <a class="tooltip-tip ajax-load" href="/Admin" title="Icons">
                                 <i class="icon-preview"></i>
                                 <span>Admin Page</span>
                                 <div class="noft-blue" style="display: inline-block; float: none;">New</div>
@@ -292,9 +292,21 @@
                                         <div class="form-group">
                                             <label class="col-sm-3 control-label">Price</label>
                                             <div class="col-sm-6">
-                                                <input type="text" name="price" th:value="${price}" class="form-control">
+                                                <input type="text" name="price_issue" th:value="${price_issue}" class="form-control">
                                             </div>
                                             <label>VND</label>
+                                        </div>
+                                        <div class="form-group" th:if="${#request.getParameter('error') == 'true' && #request.getParameter('message') == '0' }"
+                                             style="color:red;margin:10px 0px;">
+                                            Issue Failed!!!<br />
+                                            Reason : Amount of prouduct don't enough to issue!.
+
+                                        </div>
+                                        <div class="form-group" th:if="${#request.getParameter('error') == 'true' && #request.getParameter('message') == '1'}"
+                                             style="color:red;margin:10px 0px;">
+                                            Issue Failed!!!<br />
+                                            Reason : Don't exist Product!!
+
                                         </div>
                                         <button class="btn btn-success" name="Insert" type="submit">Receipt</button>
                                     </form>

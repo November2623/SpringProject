@@ -29,7 +29,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     protected void configure(HttpSecurity http) throws Exception{
-        http.authorizeRequests().antMatchers("/Admin/**").access("hasRole('ROLE_ADMIN')");
+        http.authorizeRequests().antMatchers("/", "/login").permitAll();
+        http.authorizeRequests().antMatchers("/Admin/**", "/Customers", "/Providers","/History").access("hasRole('ROLE_ADMIN')");
         http.authorizeRequests().antMatchers("/UserPage").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')");
         http.authorizeRequests().and().exceptionHandling().accessDeniedPage("/403");
 

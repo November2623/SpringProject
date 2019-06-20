@@ -6,7 +6,9 @@ public class Product {
     private int QR_code;
     private int id_provider;
     private int amount;
-    private int price;
+    private String unit;
+    private int price_receipt;
+    private int price_issue;
 
     public int getId() {
         return id;
@@ -48,11 +50,27 @@ public class Product {
         this.amount = amount;
     }
 
-    public int getPrice() {
-        return price;
+    public String getUnit() {
+        return unit;
     }
 
-    public void setPrice(int price) {
-        this.price = price;
+    public void setUnit(String unit) {
+        this.unit = unit;
+    }
+
+    public int getPrice_receipt() {
+        return price_receipt;
+    }
+
+    public void setPrice_receipt(int price_receipt) {
+        this.price_receipt = price_receipt;
+    }
+
+    public int getPrice_issue() {
+        return price_issue;
+    }
+
+    public void setPrice_issue(int price_issue) {
+        this.price_issue = price_issue;
     }
 }

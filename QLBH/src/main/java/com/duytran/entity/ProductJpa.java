@@ -8,7 +8,9 @@ import javax.persistence.*;
 
 @Entity
 @Table(name="productjpa")
-public class ProductJpa {
+public class
+
+ProductJpa {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

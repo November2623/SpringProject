@@ -1,13 +1,12 @@
 package com.duytran.controller;
 
 import com.duytran.entity.History;
-import com.duytran.entity.ProductJpa;
 import com.duytran.model.Product;
 import com.duytran.model.ProviderDTO;
 import com.duytran.repository.HistoryRepository;
 import com.duytran.repository.ProductRepository;
 import com.duytran.service.ProductService;
-import com.duytran.service.ProviserService;
+import com.duytran.service.ProviderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -27,7 +26,7 @@ public class ProductController {
     private ProductService productService;
 
     @Autowired
-    private ProviserService proviserService;
+    private ProviderService proviserService;
 
     @Autowired
     private HistoryRepository historyRepository;
@@ -63,7 +62,7 @@ public class ProductController {
             productService.addProduct(product);
         }
         History history = new History("Receipt",product.getQR_code(),product.getAmount(),
-                product.getAmount() * product.getPrice_receipt(), this.getDateTime());
+                product.getAmount() * product.getPrice_receipt(), this.getDateTime(),product.getPrice_issue());
         historyRepository.save(history);
         return "redirect:/UserPage";
 
@@ -91,7 +90,7 @@ public class ProductController {
             else{
                 productService.updateProduct(temp_id, - product.getAmount());
                 History history = new History("Issue",product.getQR_code(),product.getAmount(),
-                        product.getAmount() * product.getPrice_issue(), this.getDateTime());
+                        product.getAmount() * product.getPrice_issue(), this.getDateTime(), product.getPrice_issue());
                 historyRepository.save(history);
 
                 return "redirect:/UserPage";

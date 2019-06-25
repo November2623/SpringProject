@@ -3,7 +3,7 @@ package com.duytran.service.impl;
 import com.duytran.dao.ProviderDao;
 import com.duytran.model.ProviderDTO;
 import com.duytran.entity.Provider;
-import com.duytran.service.ProviserService;
+import com.duytran.service.ProviderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +14,7 @@ import java.util.Date;
 import java.util.List;
 
 @Service
-public class ProviserServiceImpl implements ProviserService {
+public class ProviserServiceImpl implements ProviderService {
     @Autowired
     private ProviderDao providerDao;
 

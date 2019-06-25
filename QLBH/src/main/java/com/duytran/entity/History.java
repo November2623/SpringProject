@@ -26,15 +26,19 @@ public class History {
     @Column(name="date")
     private LocalDateTime localDateTime;
 
+    @Column(name="price_issue")
+    private int price_issue;
+
     public History() {
     }
 
-    public History(String status, int product_QR_code, int amount, int price, LocalDateTime date) {
+    public History(String status, int product_QR_code, int amount, int price, LocalDateTime date, int price_issue) {
         this.status = status;
         this.product_QR_code = product_QR_code;
         this.amount = amount;
         this.price = price;
         this.localDateTime = date;
+        this.price_issue=price_issue;
     }
 
     public int getId() {
@@ -83,5 +87,13 @@ public class History {
 
     public void setDate(LocalDateTime date) {
         this.localDateTime = date;
+    }
+
+    public int getPrice_issue() {
+        return price_issue;
+    }
+
+    public void setPrice_issue(int price_issue) {
+        this.price_issue = price_issue;
     }
 }

@@ -5,15 +5,159 @@
     <title>Title</title>
 </head>
 <body>
-    <form th:action="@{/addUser}" th:object="${user}" method="post">s
-        <br>
-        <label>Enter the username: </label>
-        <input type="text" name="user_name" th:value="${user_name}">
-        <br>
-        <lable>Enter the password</lable>
-        <input type="text" name="password" th:value="${password}">
-        <br>
-        <input type="submit" name="Insert" value="Insert">
-    </form>
+    <table>
+        <tr>
+            <td>
+                <label>ID</label>
+            </td>
+
+            <td>
+                <h2 th:text="${session.product.id}"> </h2>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Product Name</label>
+            </td>
+
+            <td>
+                <h2 th:text="${session.product.product_name}"> </h2>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>QR Code</label>
+            </td>
+
+            <td>
+                <h2 th:text="${session.product.QR_code}"> </h2>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Unit</label>
+            </td>
+
+            <td>
+                <h2 th:text="${session.product.unit}"> </h2>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Price Receipt</label>
+            </td>
+
+            <td>
+                <h2 th:text="${session.product.price_receipt}"> </h2>
+            </td>
+        </tr>
+    </table>
+    <table>
+        <tr>
+            <td>
+                <label>ID</label>
+            </td>
+
+            <td>
+                <h2 th:text="${session.provider.id}"> </h2>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Product Name</label>
+            </td>
+
+            <td>
+                <h2 th:text="${session.provider.provider_name}"> </h2>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Address</label>
+            </td>
+
+            <td>
+                <h2 th:text="${session.provider.address}"> </h2>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Phone</label>
+            </td>
+
+            <td>
+                <h2 th:text="${session.provider.phone}"> </h2>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Email</label>
+            </td>
+
+            <td>
+                <h2 th:text="${session.provider.email}"> </h2>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>More Infor</label>
+            </td>
+
+            <td>
+                <h2 th:text="${session.provider.more_info}"> </h2>
+            </td>
+        </tr>
+    </table>
+    <table>
+        <tr>
+            <td>
+                <label>ID history</label>
+            </td>
+            <td>
+                <h2 th:text="${session.history.id}"></h2>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Status</label>
+            </td>
+            <td>
+                <h2 th:text="${session.history.status}"></h2>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Price Issue</label>
+            </td>
+            <td>
+                <h2 th:text="${session.history.price_issue}"></h2>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Amount</label>
+            </td>
+            <td>
+                <h2 th:text="${session.history.amount}"></h2>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Total Bill</label>
+            </td>
+            <td>
+                <h2 th:text="${session.history.price}"></h2>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Date</label>
+            </td>
+            <td>
+                <h2 th:text="${session.history.date}"></h2>
+            </td>
+        </tr>
+    </table>
+
 </body>
 </html>

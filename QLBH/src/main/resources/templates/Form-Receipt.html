@@ -279,8 +279,9 @@
 
                                                     <option th:each="provider : ${providers}"
                                                             th:value="${provider.id}"
-                                                            th:text="${provider.provider_name}"/>
+                                                            th:text="${provider.id} +'-'+ ${provider.provider_name}"/>
                                                 </select>
+                                                <a href="Insert" target="_blank">Click to Insert</a>
                                             </div>
                                         </div>
                                         <div class="form-group">

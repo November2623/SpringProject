@@ -369,6 +369,7 @@
                     <th>Amount</th>
                     <th>Total</th>
                     <th>DateTime</th>
+                    <th>Get More</th>
                 </tr>
                 </thead>
                 <body>
@@ -379,6 +380,12 @@
                     <td th:text="${h.amount}"></td>
                     <td th:text="${h.price}"></td>
                     <td th:text="${h.date}"></td>
+                    <td>
+                        <a th:href="@{/History/GetMore(id=${h.id}, status=${h.status},productQR=${h.product_QR_code},
+                                                        amount=${h.amount}, price_issue=${h.price})}">
+                            Get More
+                        </a>
+                    </td>
                 </tr>
                 </body>
                 <tfoot>
@@ -389,6 +396,7 @@
                     <th>Amount</th>
                     <th>Total</th>
                     <th>DateTime</th>
+                    <th>Get More</th>
                 </tr>
                 </tfoot>
             </table>

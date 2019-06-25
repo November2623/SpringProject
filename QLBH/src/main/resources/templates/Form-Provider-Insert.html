@@ -335,7 +335,7 @@
                                                 <input type="text" name="more_info" th:value="${more_info}" class="form-control">
                                             </div>
                                         </div>
-                                        <button class="btn btn-success" name="Insert" type="submit">Insert</button>
+                                        <button class="btn btn-success" name="Insert" type="submit" onclick="self.close();">Insert</button>
                                     </form>
                                 </div>
 
@@ -376,6 +376,12 @@
             } );
         } );
     </script>
+            <script type="text/javascript">
+                function closeSelf (f) {
+                    f.submit();
+                    window.close();
+                }
+            </script>
 
 </body>
 

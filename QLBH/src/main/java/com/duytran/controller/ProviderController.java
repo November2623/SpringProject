@@ -4,7 +4,7 @@ import com.duytran.entity.Provider;
 import com.duytran.repository.ProviderRepository;
 import com.duytran.model.ProviderDTO;
 import org.springframework.beans.factory.annotation.Autowired;
-import com.duytran.service.ProviserService;
+import com.duytran.service.ProviderService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 public class ProviderController {
 
     @Autowired
-    private ProviserService proviserService;
+    private ProviderService proviserService;
 
     @Autowired
     private ProviderRepository providerRepository;
@@ -32,7 +32,7 @@ public class ProviderController {
         rq.setAttribute("providers", listProviders);
         return "ProvidersList";
     }
-    @RequestMapping(value = "/Providers/Insert")
+    @RequestMapping(value = "/UserPage/Insert")
     public String loadFromInsert(HttpServletRequest rq){
         ProviderDTO providerDTO = new ProviderDTO();
         rq.setAttribute("provider", providerDTO);

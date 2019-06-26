@@ -37,6 +37,15 @@ public class ProductServiceImpl implements ProductService {
     public Product getProductById(int id) {
         return productDao.getProductById(id);
     }
+    @Override
+    public List<Product> getProductByProvider(int id) {
+        return productDao.getProductByProvider(id);
+    }
+
+    @Override
+    public void updateProductByObject(Product product) {
+        productDao.updateProductByObject(product);
+    }
 
     @Override
     public Product getProductByQR_code(int QR_code) {

@@ -1,8 +1,10 @@
 package com.duytran.controller;
 
 import com.duytran.entity.Provider;
+import com.duytran.model.Product;
 import com.duytran.repository.ProviderRepository;
 import com.duytran.model.ProviderDTO;
+import com.duytran.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.duytran.service.ProviderService;
 import org.springframework.stereotype.Controller;
@@ -21,6 +23,9 @@ public class ProviderController {
 
     @Autowired
     private ProviderService proviserService;
+
+    @Autowired
+    private ProductService productService;
 
     @Autowired
     private ProviderRepository providerRepository;
@@ -56,11 +61,17 @@ public class ProviderController {
     }
     @RequestMapping(value = "/Providers/Delete")
     public String deleteProvider(@RequestParam int id){
+//        ProviderDTO provider = proviserService.getProviderById(id);
+//        List<Product> productList = productService.getProductByProvider(id);
+//        for(Product product : productList){
+//            this.productService.deleteProduct(product.getId());
+//        }
         Optional<Provider> provider = providerRepository.findById(id);
-        if(provider.isPresent())
-            providerRepository.delete(provider.get());
+        if(provider.isPresent()){
+            Provider provider1 = provider.get();
+            this.providerRepository.delete(provider1);
+        }
 
-        //providerRepository.deleteById(id);
         return "redirect:/Providers";
     }
 }

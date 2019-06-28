@@ -32,6 +32,13 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     @Override
+    public void updateProductByObject(Product product) {
+        String sql = "update product set id_provider = ? where id = ?";
+        jdbcTemplate.update(sql, product.getId_provider(), product.getId());
+    }
+
+
+    @Override
     public Product getProductById(int id) {
         String sql = "select * from product where id = ?";
         return jdbcTemplate.queryForObject(sql, new Object[]{id}, new RowMapper<Product>() {
@@ -80,6 +87,25 @@ public class ProductDaoImpl implements ProductDao {
     public List<Product> getAllProducts() {
         String sql = "select * from product";
         return jdbcTemplate.query(sql, new Object[]{ }, new RowMapper<Product>() {
+            @Override
+            public Product mapRow(ResultSet rs, int i) throws SQLException {
+                Product product = new Product();
+                product.setId(rs.getInt("id"));
+                product.setProduct_name(rs.getString("product_name"));
+                product.setQR_code(rs.getInt("QR_code"));
+                product.setId_provider(rs.getInt("id_provider"));
+                product.setAmount(rs.getInt("amount"));
+                product.setUnit(rs.getString("unit"));
+                product.setPrice_receipt(rs.getInt("price_receipt"));
+                return product;
+            }
+        });
+    }
+
+    @Override
+    public List<Product> getProductByProvider(int id_provider) {
+        String sql = "select * from product where id_provider=?";
+        return jdbcTemplate.query(sql, new Object[]{id_provider}, new RowMapper<Product>() {
             @Override
             public Product mapRow(ResultSet rs, int i) throws SQLException {
                 Product product = new Product();

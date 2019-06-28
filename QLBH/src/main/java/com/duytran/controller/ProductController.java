@@ -1,15 +1,18 @@
 package com.duytran.controller;
 
 import com.duytran.entity.History;
+import com.duytran.model.Customer;
 import com.duytran.model.Product;
 import com.duytran.model.ProviderDTO;
 import com.duytran.repository.HistoryRepository;
 import com.duytran.repository.ProductRepository;
+import com.duytran.service.CustomerService;
 import com.duytran.service.ProductService;
 import com.duytran.service.ProviderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -32,7 +35,7 @@ public class ProductController {
     private HistoryRepository historyRepository;
 
     @Autowired
-    private ProductRepository productRepository;
+    private CustomerService customerService;
 
     @RequestMapping(value = "/Products")
     public String getAllProducts(HttpServletRequest rs){
@@ -60,9 +63,10 @@ public class ProductController {
         }
         else{
             productService.addProduct(product);
+
         }
         History history = new History("Receipt",product.getQR_code(),product.getAmount(),
-                product.getAmount() * product.getPrice_receipt(), this.getDateTime(),product.getPrice_issue());
+                product.getAmount() * product.getPrice_receipt(), this.getDateTime(),product.getPrice_issue(),1);
         historyRepository.save(history);
         return "redirect:/UserPage";
 
@@ -73,24 +77,28 @@ public class ProductController {
     public String loadFormIssue(HttpServletRequest rq){
         Product product = new Product();
         List<ProviderDTO> providerList = proviserService.getAllProviders();
+        List<Customer> customers = customerService.getAllUsers();
+        rq.setAttribute("customers",customers);
         rq.setAttribute("product", product);
         rq.setAttribute("providers", providerList);
         return "Form-Issue";
     }
 
     @RequestMapping(value = "/Issue", method = RequestMethod.POST)
-    public String issueGoods(@ModelAttribute("product") Product product){
+    public String issueGoods(@ModelAttribute("product") Product product, HttpServletRequest req){
         List<Product> productList = productService.getAllProducts();
+        String id = req.getParameter("id");
+        int id_customer = Integer.parseInt(id);
         if(checkExists(productList, product)){
             int temp_id = productService.getProductByQR_code(product.getQR_code()).getId();
             Product product_temp  = productService.getProductById(temp_id);
             if(product_temp.getAmount() < product.getAmount()){
-                return "redirect:/UserPage/Issue?error=true&message=1";
+                return "redirect:/UserPage/Issue?error=true&message=0";
             }
             else{
                 productService.updateProduct(temp_id, - product.getAmount());
                 History history = new History("Issue",product.getQR_code(),product.getAmount(),
-                        product.getAmount() * product.getPrice_issue(), this.getDateTime(), product.getPrice_issue());
+                        product.getAmount() * product.getPrice_issue(), this.getDateTime(), product.getPrice_issue(), id_customer);
                 historyRepository.save(history);
 
                 return "redirect:/UserPage";
@@ -99,7 +107,7 @@ public class ProductController {
         }
         else
         {
-            return "redirect:/UserPage/Issue?error=true";
+            return "redirect:/UserPage/Issue?error=true&message=1";
         }
 
     }

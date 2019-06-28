@@ -90,7 +90,7 @@
                             </li>
                             <li class="divider"></li>
                             <li>
-                                <a href="#">
+                                <a href="/login?message=logout">
                                     <span class="entypo-logout"></span>&#160;&#160;Logout</a>
                             </li>
                         </ul>
@@ -260,6 +260,18 @@
                                 <div class="panel-body">
                                     <form th:action="@{/Issue}" th:object="${product}" method="post" class="form-horizontal bucket-form">
                                         <div class="form-group">
+                                            <label class="col-sm-3 control-label">Customer</label>
+                                            <div class="col-sm-6">
+
+                                                <select name="id">
+
+                                                    <option th:each="customer : ${customers}"
+                                                            th:value="${customer.id}"
+                                                            th:text="${customer.id} + '-'+ ${customer.customer_name}"/>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
                                             <label class="col-sm-3 control-label">Product Name</label>
                                             <div class="col-sm-6">
                                                 <input type="text" name="product_name" th:value="${product_name}" class="form-control">
@@ -279,7 +291,7 @@
 
                                                     <option th:each="provider : ${providers}"
                                                             th:value="${provider.id}"
-                                                            th:text="${provider.provider_name}"/>
+                                                            th:text="${provider.id} + '-' + ${provider.provider_name}"/>
                                                 </select>
                                             </div>
                                         </div>
@@ -298,17 +310,27 @@
                                         </div>
                                         <div class="form-group" th:if="${#request.getParameter('error') == 'true' && #request.getParameter('message') == '0' }"
                                              style="color:red;margin:10px 0px;">
-                                            Issue Failed!!!<br />
-                                            Reason : Amount of prouduct don't enough to issue!.
+                                            <div class="alert alert-danger">
+                                                <button data-dismiss="alert" class="close" type="button">×</button>
+                                                <span class="entypo-attention"></span>
+                                                <strong>Oh snap!</strong>&nbsp;&nbsp;Change a few things up and try submitting again.
+                                            </div>
 
                                         </div>
                                         <div class="form-group" th:if="${#request.getParameter('error') == 'true' && #request.getParameter('message') == '1'}"
                                              style="color:red;margin:10px 0px;">
-                                            Issue Failed!!!<br />
-                                            Reason : Don't exist Product!!
+                                            <div class="alert alert-danger">
+                                                <button data-dismiss="alert" class="close" type="button">×</button>
+                                                <span class="entypo-attention"></span>
+                                                <strong>Oh snap!</strong>&nbsp;&nbsp;Change a few things up and try submitting again.
+                                            </div>
 
                                         </div>
+                                        <div>
+                                            <a href="Insert-Customer" target="_blank">Click to Add new Customers</a>
+                                        </div>
                                         <button class="btn btn-success" name="Insert" type="submit">Receipt</button>
+
                                     </form>
                                 </div>
 

@@ -31,8 +31,7 @@ public class Provider implements Serializable {
     @Column(name = "contract_date")
     private Date contract_date;
 
-    @OneToMany(fetch = FetchType.LAZY,mappedBy = "provider", cascade = CascadeType.ALL)
-    private Set<ProductJpa> productJpas;
+
 
     public Provider() {
     }

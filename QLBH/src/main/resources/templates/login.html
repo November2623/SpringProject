@@ -51,6 +51,11 @@
                                 <label for="inputPassword">Password</label>
                                 <input type="password" id="inputPassword" name="password" class="form-control">
                             </div>
+                            <div class="alert alert-success" th:if="${#request.getParameter('message') == 'logout'}">
+                                <button data-dismiss="alert" class="close" type="button">×</button>
+                                <span class="entypo-thumbs-up"></span>
+                                <strong>Logout!</strong>&nbsp;&nbsp;Successfully! You can login again!.
+                            </div>
                             <div class="checkbox pull-left">
                                 <label>
                                     <input type="checkbox">Remember me</label>
@@ -58,6 +63,7 @@
                             <button class="btn btn btn-primary pull-right" type="submit" href="/Customers" >
                                 Log In
                             </button>
+
                         </form>
                         
                         <hr>

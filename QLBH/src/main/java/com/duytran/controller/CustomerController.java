@@ -29,9 +29,8 @@ public class CustomerController {
         return "CustomersList";
 
     }
-    @RequestMapping(value = "/Customers/Insert", method= RequestMethod.GET)
+    @RequestMapping(value = "/UserPage/Insert-Customer", method= RequestMethod.GET)
     public String loadFormInsert(HttpServletRequest rs){
-//        rs.setAttribute("customer", new Customer());
         return "Form-Customers-Insert";
     }
     @RequestMapping(value = "/Customers/Insert", method = RequestMethod.POST)

@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import java.util.List;
+
 @Repository
 @Transactional
 public class ProviderDaoImpl implements ProviderDao {
@@ -33,7 +34,8 @@ public class ProviderDaoImpl implements ProviderDao {
 
     @Override
     public void deleteProvider(Provider provider){
-        entityManager.remove(provider);
+        String jql = "DELETE FROM Provider p WHERE p.id=" + provider.getId();
+        entityManager.createQuery(jql, Provider.class);
     }
 
     @Override

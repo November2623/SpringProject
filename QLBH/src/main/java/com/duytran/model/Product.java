@@ -1,12 +1,22 @@
 package com.duytran.model;
 
+import org.springframework.validation.annotation.Validated;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+@Validated
 public class Product {
     private int id;
+    @NotNull(message = "not null")
     private String product_name;
+    @NotBlank(message="error")
     private int QR_code;
+    @NotNull(message = "error")
     private int id_provider;
+    @NotBlank(message = "error")
     private int amount;
     private String unit;
+    @NotBlank(message = "error")
     private int price_receipt;
     private int price_issue;
 

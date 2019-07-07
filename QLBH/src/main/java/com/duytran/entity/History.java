@@ -29,16 +29,29 @@ public class History {
     @Column(name="price_issue")
     private int price_issue;
 
+    @Column(name="id_customer")
+    private int id_customer;
+
     public History() {
     }
 
-    public History(String status, int product_QR_code, int amount, int price, LocalDateTime date, int price_issue) {
+    public History(String status, int product_QR_code, int amount, int price, LocalDateTime date, int price_issue, int id_customer) {
         this.status = status;
         this.product_QR_code = product_QR_code;
         this.amount = amount;
         this.price = price;
         this.localDateTime = date;
         this.price_issue=price_issue;
+        this.id_customer = id_customer;
+    }
+
+    public History(String status, int product_QR_code, int amount, int price, LocalDateTime localDateTime, int price_issue) {
+        this.status = status;
+        this.product_QR_code = product_QR_code;
+        this.amount = amount;
+        this.price = price;
+        this.localDateTime = localDateTime;
+        this.price_issue = price_issue;
     }
 
     public int getId() {
@@ -95,5 +108,13 @@ public class History {
 
     public void setPrice_issue(int price_issue) {
         this.price_issue = price_issue;
+    }
+
+    public int getId_customer() {
+        return id_customer;
+    }
+
+    public void setId_customer(int id_customer) {
+        this.id_customer = id_customer;
     }
 }

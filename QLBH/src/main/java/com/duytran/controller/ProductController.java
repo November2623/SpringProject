@@ -11,12 +11,14 @@ import com.duytran.service.ProductService;
 import com.duytran.service.ProviderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -85,7 +87,10 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/Issue", method = RequestMethod.POST)
-    public String issueGoods(@ModelAttribute("product") Product product, HttpServletRequest req){
+    public String issueGoods(@ModelAttribute("product") Product product, HttpServletRequest req, BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+            return("403");
+        }
         List<Product> productList = productService.getAllProducts();
         String id = req.getParameter("id");
         int id_customer = Integer.parseInt(id);
@@ -94,6 +99,9 @@ public class ProductController {
             Product product_temp  = productService.getProductById(temp_id);
             if(product_temp.getAmount() < product.getAmount()){
                 return "redirect:/UserPage/Issue?error=true&message=0";
+            }
+            else if(product_temp.getPrice_receipt() > product.getPrice_issue()){
+                return "redirect:/UserPage/Issue?error=true&message=1";
             }
             else{
                 productService.updateProduct(temp_id, - product.getAmount());

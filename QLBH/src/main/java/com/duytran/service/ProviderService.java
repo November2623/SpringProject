@@ -4,6 +4,7 @@ package com.duytran.service;
 import com.duytran.entity.Provider;
 import com.duytran.model.ProviderDTO;
 
+import java.util.Date;
 import java.util.List;
 
 public interface ProviderService {
@@ -12,4 +13,5 @@ public interface ProviderService {
     public void deleteProvider(ProviderDTO provider);
     public void updateProvider(ProviderDTO provider);
     public ProviderDTO getProviderById(int id);
+
 }

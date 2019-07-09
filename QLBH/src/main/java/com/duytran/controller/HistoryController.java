@@ -59,7 +59,7 @@ public class HistoryController {
 
         session.setAttribute("product", product);
         session.setAttribute("provider", provider);
-        return "Form";
+        return "Bill";
 
     }
 }

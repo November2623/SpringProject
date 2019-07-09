@@ -14,7 +14,7 @@ import java.util.Date;
 import java.util.List;
 
 @Service
-public class ProviserServiceImpl implements ProviderService {
+public class ProviderServiceImpl implements ProviderService {
     @Autowired
     private ProviderDao providerDao;
 
@@ -103,4 +103,5 @@ public class ProviserServiceImpl implements ProviderService {
 
         providerDao.updateProvider(p);
     }
+
 }

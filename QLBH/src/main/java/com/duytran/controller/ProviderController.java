@@ -1,7 +1,6 @@
 package com.duytran.controller;
 
 import com.duytran.entity.Provider;
-import com.duytran.model.Product;
 import com.duytran.repository.ProviderRepository;
 import com.duytran.model.ProviderDTO;
 import com.duytran.service.ProductService;
@@ -22,7 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 public class ProviderController {
 
     @Autowired
-    private ProviderService proviserService;
+    private ProviderService providerService;
 
     @Autowired
     private ProductService productService;
@@ -33,7 +32,7 @@ public class ProviderController {
 
     @RequestMapping(value = "/Providers")
     public String getAllProvider(HttpServletRequest rq){
-        List<ProviderDTO> listProviders = proviserService.getAllProviders();
+        List<ProviderDTO> listProviders = providerService.getAllProviders();
         rq.setAttribute("providers", listProviders);
         return "ProvidersList";
     }
@@ -45,27 +44,24 @@ public class ProviderController {
     }
     @RequestMapping(value = "/Providers/Insert", method = RequestMethod.POST)
     public String addProvider(@ModelAttribute("provider") ProviderDTO provider){
-        proviserService.addProvider(provider);
+        providerService.addProvider(provider);
         return "redirect:/Providers";
     }
     @RequestMapping(value = "/Providers/Update")
     public String loadFromUpdate(HttpServletRequest rq, @RequestParam int id){
-        rq.setAttribute("provider", proviserService.getProviderById(id));
+        rq.setAttribute("provider", providerService.getProviderById(id));
         return "Form-Provider-Update";
 
     }
     @RequestMapping(value = "/Providers/Update", method = RequestMethod.POST)
-    public String updateProvider(@ModelAttribute("provider") ProviderDTO provider){
-        proviserService.updateProvider(provider);
+    public String updateProvider(@ModelAttribute("provider") ProviderDTO provider, @RequestParam int id){
+        ProviderDTO providerDTO = providerService.getProviderById(id);
+        provider.setContract_date(providerDTO.getContract_date());
+        providerService.updateProvider(provider);
         return "redirect:/Providers";
     }
     @RequestMapping(value = "/Providers/Delete")
     public String deleteProvider(@RequestParam int id){
-//        ProviderDTO provider = proviserService.getProviderById(id);
-//        List<Product> productList = productService.getProductByProvider(id);
-//        for(Product product : productList){
-//            this.productService.deleteProduct(product.getId());
-//        }
         Optional<Provider> provider = providerRepository.findById(id);
         if(provider.isPresent()){
             Provider provider1 = provider.get();

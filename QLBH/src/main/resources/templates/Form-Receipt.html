@@ -73,7 +73,7 @@
                 <ul style="margin-right:0;" class="nav navbar-nav navbar-right">
                     <li>
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                            <img alt="" class="admin-pic img-circle" src="http://api.randomuser.me/portraits/thumb/men/10.jpg">Hi, Dave Mattew <b class="caret"></b>
+                            <img alt="" class="admin-pic img-circle" src="https://randomuser.me/api/portraits/lego/2.jpg"><span th:utext="${#request.userPrincipal.name}"></span><b class="caret"></b>
                         </a>
                         <ul style="margin-top:14px;" role="menu" class="dropdown-setting dropdown-menu">
                             <li>
@@ -108,7 +108,7 @@
     <!-- SIDE MENU -->
     <div id="skin-select" style="position: fixed;">
         <div id="logo">
-            <h1>Sanda.asia
+            <h1>WareHouse
                 <span>v1.0</span>
             </h1>
         </div>
@@ -141,7 +141,7 @@
                         <li>
                             <a href="#" style="border-left:0px solid!important;" class="title-menu-left">
 
-                                <span class="">Quản Lý Kho Hàng</span>
+                                <span class="">Warehouse Management</span>
                                 <i data-toggle="tooltip" class="entypo-cog pull-right config-wrap"></i>
 
                             </a>
@@ -150,7 +150,7 @@
                         <li>
                             <a class="tooltip-tip ajax-load" href="/UserPage/Receipt" title="Dashboard">
                                 <i class="icon-window"></i>
-                                <span>Nhập Kho</span>
+                                <span>Goods Receipt</span>
 
                             </a>
                         </li>
@@ -158,14 +158,14 @@
                         <li>
                             <a class="tooltip-tip ajax-load" href="/UserPage/Issue" title="Dashboard">
                                 <i class="icon-window"></i>
-                                <span>Xuất Kho</span>
+                                <span>Goods Issue</span>
 
                             </a>
                         </li>
                         <li>
                             <a class="tooltip-tip ajax-load" href="/UserPage" title="Mail">
                                 <i class="icon-mail"></i>
-                                <span>Kiểm Kho</span>
+                                <span>Stock Take</span>
                             </a>
                         </li>
 
@@ -241,8 +241,7 @@
                     <div class="col-sm-12">
                         <div class="nest" id="elementClose">
                             <div class="title-alt">
-                                <h6>
-                                    Form Customer</h6>
+                                <h6>Form Goods Receipt</h6>
                                 <div class="titleClose">
                                     <a class="gone" href="#elementClose">
                                         <span class="entypo-cancel"></span>
@@ -294,8 +293,12 @@
                                             <label class="col-sm-3 control-label">Unit</label>
                                             <div class="col-sm-6">
                                                 <select name="unit">
+                                                    <option value="peace">Peace</option>
+                                                    <option value="set">Set</option>
                                                     <option value="tons">Tons</option>
                                                     <option value="boxs">Boxs</option>
+                                                    <option value="kg">Kg</option>
+                                                    <option value="dozen">Dozen</option>
                                                 </select>
                                             </div>
                                         </div>

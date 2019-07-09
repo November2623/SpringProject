@@ -274,7 +274,7 @@
                                             <label class="col-sm-3 control-label">ID Provider</label>
                                             <div class="col-sm-6">
                                                 <!--<input type="text" name="id_provider" th:value="${id_provider}" class="form-control round-input">-->
-                                                <select name="id_provider">
+                                                <select name="id_provider" class="form-control">
 
                                                     <option th:each="provider : ${providers}"
                                                             th:value="${provider.id}"
@@ -292,7 +292,7 @@
                                         <div class="form-group">
                                             <label class="col-sm-3 control-label">Unit</label>
                                             <div class="col-sm-6">
-                                                <select name="unit">
+                                                <select name="unit" class="form-control">
                                                     <option value="peace">Peace</option>
                                                     <option value="set">Set</option>
                                                     <option value="tons">Tons</option>

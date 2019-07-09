@@ -278,7 +278,7 @@
                     <td th:text="${h.status}"></td>
                     <td th:text="${h.product_QR_code}"></td>
                     <td th:text="${h.amount}"></td>
-                    <td th:text="${h.price}"></td>
+                    <td th:text="${#numbers.formatInteger(h.price, 0, 'POINT')}"></td>
                     <td th:text="${h.date}"></td>
                     <td>
                         <a th:href="@{/History/GetMore(id=${h.id}, status=${h.status},productQR=${h.product_QR_code},

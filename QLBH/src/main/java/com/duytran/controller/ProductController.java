@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.xml.sax.ErrorHandler;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -87,36 +88,38 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/Issue", method = RequestMethod.POST)
-    public String issueGoods(@ModelAttribute("product") Product product, HttpServletRequest req, BindingResult bindingResult){
-        if(bindingResult.hasErrors()){
-            return("403");
-        }
-        List<Product> productList = productService.getAllProducts();
-        String id = req.getParameter("id");
-        int id_customer = Integer.parseInt(id);
-        if(checkExists(productList, product)){
-            int temp_id = productService.getProductByQR_code(product.getQR_code()).getId();
-            Product product_temp  = productService.getProductById(temp_id);
-            if(product_temp.getAmount() < product.getAmount()){
-                return "redirect:/UserPage/Issue?error=true&message=0";
+    public String issueGoods(@ModelAttribute("product") Product product, HttpServletRequest req){
+        try{List<Product> productList = productService.getAllProducts();
+            String id = req.getParameter("id");
+            int id_customer = Integer.parseInt(id);
+            if(checkExists(productList, product)){
+                int temp_id = productService.getProductByQR_code(product.getQR_code()).getId();
+                Product product_temp  = productService.getProductById(temp_id);
+                if(product_temp.getAmount() < product.getAmount()){
+                    return "redirect:/UserPage/Issue?error=true&message=0";
+                }
+                else if(product_temp.getPrice_receipt() > product.getPrice_issue()){
+                    return "redirect:/UserPage/Issue?error=true&message=1";
+                }
+                else{
+                    productService.updateProduct(temp_id, - product.getAmount());
+                    History history = new History("Issue",product.getQR_code(),product.getAmount(),
+                            product.getAmount() * product.getPrice_issue(), this.getDateTime(), product.getPrice_issue(), id_customer);
+                    historyRepository.save(history);
+
+                    return "redirect:/UserPage";
+                }
+
             }
-            else if(product_temp.getPrice_receipt() > product.getPrice_issue()){
+            else
+            {
                 return "redirect:/UserPage/Issue?error=true&message=1";
             }
-            else{
-                productService.updateProduct(temp_id, - product.getAmount());
-                History history = new History("Issue",product.getQR_code(),product.getAmount(),
-                        product.getAmount() * product.getPrice_issue(), this.getDateTime(), product.getPrice_issue(), id_customer);
-                historyRepository.save(history);
-
-                return "redirect:/UserPage";
-            }
+        }catch (NumberFormatException n){
+            return "403";
 
         }
-        else
-        {
-            return "redirect:/UserPage/Issue?error=true&message=1";
-        }
+
 
     }
     private boolean checkExists(List<Product> productList, Product product){
